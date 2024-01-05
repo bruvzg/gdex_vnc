@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://depwooswpbd4g"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_gmgnv"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_gmgnv")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transparent = false
+texture_filter = 0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.964852, -0.0216742, -0.261899, 0.044574, 0.99565, 0.0818157, 0.258986, -0.0906139, 0.961621, -0.931759, 0.177653, 4.31119)
+current = true

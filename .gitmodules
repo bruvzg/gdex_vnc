@@ -1,0 +1,6 @@
+[submodule "libvncserver"]
+	path = libvncserver
+	url = https://github.com/LibVNC/libvncserver
+[submodule "godot-cpp"]
+	path = godot-cpp
+	url = https://github.com/godotengine/godot-cpp
