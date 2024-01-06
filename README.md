@@ -12,17 +12,7 @@ git submodule init
 git submodule update
 ```
 
-Building libvnc:
-```
-cd libvncserver
-mkdir build
-cd build
-ccmake ..
-cmake --build . --config Release
-cd ..\..
-```
-
-And finally build our library:
+Build library:
 ```
 scons
 ```

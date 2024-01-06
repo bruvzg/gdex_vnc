@@ -195,3 +195,4 @@ compile_commands.json
 # Python development
 .venv
 venv
+*.a

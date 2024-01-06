@@ -15,6 +15,7 @@ void initialize_gdex_vnc_module(ModuleInitializationLevel p_level) {
 		return;
 	}
 
+	GDEXVNC_Texture::init_key_mapping();
 	ClassDB::register_class<GDEXVNC_Texture>();
 }
 
