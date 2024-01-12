@@ -508,32 +508,6 @@ void GDEXVNC_Texture::init_key_mapping() {
 	key_map[Key::KEY_GREATER] = XK_greater;
 	key_map[Key::KEY_QUESTION] = XK_question;
 	key_map[Key::KEY_AT] = XK_at;
-	key_map[Key::KEY_A] = XK_a;
-	key_map[Key::KEY_B] = XK_b;
-	key_map[Key::KEY_C] = XK_c;
-	key_map[Key::KEY_D] = XK_d;
-	key_map[Key::KEY_E] = XK_e;
-	key_map[Key::KEY_F] = XK_f;
-	key_map[Key::KEY_G] = XK_g;
-	key_map[Key::KEY_H] = XK_h;
-	key_map[Key::KEY_I] = XK_i;
-	key_map[Key::KEY_J] = XK_j;
-	key_map[Key::KEY_K] = XK_k;
-	key_map[Key::KEY_L] = XK_l;
-	key_map[Key::KEY_M] = XK_m;
-	key_map[Key::KEY_N] = XK_n;
-	key_map[Key::KEY_O] = XK_o;
-	key_map[Key::KEY_P] = XK_p;
-	key_map[Key::KEY_Q] = XK_q;
-	key_map[Key::KEY_R] = XK_r;
-	key_map[Key::KEY_S] = XK_s;
-	key_map[Key::KEY_T] = XK_t;
-	key_map[Key::KEY_U] = XK_u;
-	key_map[Key::KEY_V] = XK_v;
-	key_map[Key::KEY_W] = XK_w;
-	key_map[Key::KEY_X] = XK_x;
-	key_map[Key::KEY_Y] = XK_y;
-	key_map[Key::KEY_Z] = XK_z;
 	key_map[Key::KEY_BRACKETLEFT] = XK_bracketleft;
 	key_map[Key::KEY_BACKSLASH] = XK_backslash;
 	key_map[Key::KEY_BRACKETRIGHT] = XK_bracketright;
@@ -553,17 +527,17 @@ bool GDEXVNC_Texture::send_key_event(Key p_keycode, bool p_pressed) {
 
 	vnc_mutex.lock();
 	if (connection_status == VNC_CONNECTED) {
+		VNCMessage message;
+		message.type = VNC_MSG_KEY_EVENT;
+		message.pressed = p_pressed;
+
 		const uint32_t *key = key_map.getptr(p_keycode);
 		if (key) {
-			VNCMessage message;
-			message.type = VNC_MSG_KEY_EVENT;
 			message.key = *key;
-			message.pressed = p_pressed;
-
-			message_queue.push(message);
 		} else {
-			success = false;	
+			message.key = (uint32_t)p_keycode;
 		}
+		message_queue.push(message);
 	} else {
 		success = false;
 	}
