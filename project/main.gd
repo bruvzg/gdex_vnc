@@ -154,6 +154,7 @@ func _failed():
 
 func _ready():
 	vnc_texture = GDEXVNC_Texture.new()
+	vnc_texture.target_fps = 60
 	vnc_texture.connected.connect(_conn)
 	vnc_texture.disconnected.connect(_dconn)
 	vnc_texture.connection_failed.connect(_failed)
@@ -164,6 +165,9 @@ func _ready():
 
 func _input(event):
 	if vnc_texture and event is InputEventKey:
+		if not event.shift_pressed and event.physical_keycode >= 0x41 and event.physical_keycode <= 0x5A:
+			vnc_texture.send_key_event(event.physical_keycode + 0x20, event.pressed)
+		else:
 			vnc_texture.send_key_event(event.physical_keycode, event.pressed)
 
 
